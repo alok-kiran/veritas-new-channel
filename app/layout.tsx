@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en">
       <body
         className={`${systemFont.className} antialiased`}
       >
@@ -46,8 +46,9 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        ></ThemeProvider>
+        >
         {children}
+        </ThemeProvider>
       </body>
     </html>
   );
