@@ -4,6 +4,7 @@ import React from 'react'
 import { Card } from './ui/card';
 import { UserPen } from "lucide-react";
 import Image from 'next/image';
+import FeaturedNewsSkeleton from './skeleton/featured-news-skeleton';
 
 export interface NewsArticle {
   id: string;
@@ -29,6 +30,11 @@ const  FeaturedNews = () =>  {
       .then(response => response.json())
       .then(data => setNews(data.news)).finally(() => setLoading(false));
   }, []);
+  if(loading){
+    return (
+      <FeaturedNewsSkeleton />
+    )
+  }
   return (
   <div>
     {news.slice(0,1).map((item: NewsArticle) => (
@@ -51,7 +57,7 @@ const  FeaturedNews = () =>  {
             <div className="mt-4 flex flex-wrap">
             {item.tags.map((tag, index) => (
               <span key={index} className="text-sm text-muted-foreground mr-2 mb-2">
-              {tag}
+              {tag?.startsWith("#") ? tag : `#${tag}`}
               </span>
             ))}
             </div>

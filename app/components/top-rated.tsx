@@ -4,15 +4,26 @@ import React from 'react'
 import { Card } from './ui/card';
 import { UserPen } from 'lucide-react';
 import { NewsArticle } from './features-news';
+import TopReadSkeleton from './skeleton/top-read-skeleton';
 
 function TopRated() {
     const [news, setNews] = React.useState([]);
+    const [loading, setLoading] = React.useState(false);
 
     React.useEffect(() => {
+        setLoading(true);
         fetch('/api/news')
             .then(response => response.json())
-            .then(data => setNews(data.news));
+            .then(data => setNews(data.news)).finally(() => setLoading(false));
     }, []);
+
+    if(loading){
+        return (
+           <div className="lg:col-span-3">
+                <TopReadSkeleton />
+           </div> 
+        )
+    }
 
   return (
     <div className="lg:col-span-3">
