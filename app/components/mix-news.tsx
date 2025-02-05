@@ -3,6 +3,7 @@ import React from 'react'
 import { Card } from './ui/card'
 import { UserPen } from 'lucide-react';
 import { NewsArticle } from './features-news';
+import Link from 'next/link';
 
 function MixNews() {
 
@@ -19,7 +20,9 @@ function MixNews() {
   return (
   <>
     {news.slice(1,5).map((item: NewsArticle) => (
-    <Card key={item.id} className="p-4 hover-scale transition-all duration-200 cursor-pointer flex flex-col justify-between ">
+    <Card key={item._id} className="p-4 hover-scale transition-all duration-200 cursor-pointer ">
+      <Link href={`/${item._id}`}>
+      <div className='flex flex-col justify-between w-full h-full'>
       <div>
       <h3 className="font-medium mb-2 text-xl">
       {item.title}
@@ -42,7 +45,9 @@ function MixNews() {
         year: "numeric",
         })}
       </span>
+      </div>      
       </div>
+      </Link>
     </Card>
     ))}
   </>

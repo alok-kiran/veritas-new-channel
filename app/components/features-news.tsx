@@ -5,9 +5,10 @@ import { Card } from './ui/card';
 import { UserPen } from "lucide-react";
 import Image from 'next/image';
 import FeaturedNewsSkeleton from './skeleton/featured-news-skeleton';
+import Link from 'next/link';
 
 export interface NewsArticle {
-  id: string;
+  _id: string;
   title: string;
   content: string;
   tags: string[];
@@ -43,7 +44,7 @@ const FeaturedNews = () => {
   return (
     <>
       {news.slice(0, 4).map((news: NewsArticle) => {
-        const isExpanded = expanded[news.id];
+        const isExpanded = expanded[news._id];
         const contentWords = news.content.split(' ');
         const shouldTruncate = contentWords.length > 50;
         const displayedContent = shouldTruncate && !isExpanded
@@ -51,7 +52,8 @@ const FeaturedNews = () => {
           : news.content;
 
         return (
-          <Card key={news.id} className="mb-8 hover-scale transition-all duration-200 animate-scale-in cursor-pointer">
+          <Link key={news._id} href={`/${news._id}`}>
+            <Card className="mb-8 hover-scale transition-all duration-200 animate-scale-in cursor-pointer">
             <article className="max-w-4xl mx-auto p-6 bg-card shadow-md rounded-lg animate-fade-in">
               {/* News Header */}
               <h1 className="text-4xl font-bold text-card-foreground">{news.title}</h1>
@@ -91,7 +93,7 @@ const FeaturedNews = () => {
                 ))}
                 {shouldTruncate && (
                   <button
-                    onClick={() => toggleReadMore(news.id)}
+                    onClick={() => toggleReadMore(news._id)}
                     className="text-blue-500 hover:underline"
                   >
                     {isExpanded ? 'Read Less' : 'Read More'}
@@ -109,6 +111,7 @@ const FeaturedNews = () => {
               </div>
             </article>
           </Card>
+            </Link>
         );
       })}
     </>

@@ -5,6 +5,7 @@ import { Card } from './ui/card';
 import { UserPen } from 'lucide-react';
 import { NewsArticle } from './features-news';
 import TopReadSkeleton from './skeleton/top-read-skeleton';
+import Link from 'next/link';
 
 function TopRated() {
     const [news, setNews] = React.useState([]);
@@ -31,7 +32,9 @@ function TopRated() {
       <h2 className="text-2xl font-bold text-red-600 mb-4">Top Read</h2>
       <div className="space-y-6">
         {news.slice(2,5).map((item: NewsArticle) => (
-          <Card key={item.id} className="p-4 hover-scale transition-all duration-200 cursor-pointer">
+          <Card key={item._id} className="p-4 hover-scale transition-all duration-200 cursor-pointer">
+                       <Link key={item._id} href={`/${item._id}`}>
+
             <h3 className="font-medium mb-2 text-xl">
               {item.title}
             </h3>
@@ -57,6 +60,7 @@ function TopRated() {
                         </span>
                       </div>
             </div>
+            </Link>
           </Card>
         ))}
       </div>

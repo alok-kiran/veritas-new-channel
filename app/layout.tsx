@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "./providers";
 import { Toaster } from "sonner";
+import Header from "./components/header";
+import NavBar from "./components/navbar";
+import Footer from "./components/footer";
 
 const systemFont = localFont({
   src: [
@@ -48,8 +51,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <NavBar />
+          <Header />
           <Toaster />
         {children}
+        <Footer />
         </ThemeProvider>
       </body>
     </html>
